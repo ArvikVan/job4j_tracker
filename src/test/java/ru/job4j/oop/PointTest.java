@@ -51,4 +51,13 @@ public class PointTest {
         double out = a.distance(b);
         Assert.assertEquals(expected, out, 0.01);
     }
+
+    @Test
+    public void when111To117Then6() {
+        Point a = new Point(1, 1, 1);
+        Point b = new Point(1, 1, 7);
+        double expected = 6.0;
+        double out = a.distance3d(b);
+        Assert.assertEquals(expected, out, 0.01);
+    }
 }
