@@ -6,6 +6,11 @@ public class Doctor extends Profession {
     public Doctor() {
     }
 
+    public Doctor(String name, String surname, String education, int birthday, String thisIsDoctor) {
+        super(name, surname, education, birthday);
+        this.thisIsDoctor = thisIsDoctor;
+    }
+
     private String doctorMethod() {
         return  "This is doctorMethod  from Doctor extends Profession";
     }
