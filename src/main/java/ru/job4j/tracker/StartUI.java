@@ -15,6 +15,7 @@ public class StartUI {
         tracker.add(firstItem);
         tracker.add(secondItem);
         System.out.println(tracker.findById(2).toString());
+        System.out.println(firstItem);
 
         /*Item itemDateTime = new Item();
         itemDateTime.getCreated();
