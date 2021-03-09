@@ -1,27 +1,84 @@
 package ru.job4j.tracker;
 
-import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class StartUI {
+    public void init(Scanner scanner, Tracker tracker) {
+        boolean run = true;
+        while (run) {
+            this.showMenu();
+            int select = Integer.valueOf(scanner.nextLine());
+            if (select == 0) {
+                System.out.println("=== Create a new Item ====");
+                System.out.print("Enter name: ");
+                String name = scanner.nextLine();
+                Item item = new Item(name);
+                tracker.add(item);
+            } else if (select == 1) {
+                Item[] items = tracker.findAll();
+                for (int i = 0; i < items.length; i++) {
+                    System.out.println(items[i]);
+                }
+            } else if (select == 2) {
+                System.out.println("Получить id заявки, которую мы будем изменять");
+                int id = Integer.valueOf(scanner.nextLine());
+                System.out.println("Получить имя заявки на которую мы будем заменять");
+                String name = scanner.nextLine();
+                Item item = new Item(name);
+                if (tracker.replace(id, item)) {
+                    System.out.println("SUCCESS");
+                } else {
+                    System.out.println("ERROR");
+                }
+            } else if (select == 3) {
+                System.out.println("Получить id заявки, которую мы будем удалять");
+                int id = Integer.valueOf(scanner.nextLine());
+                if (tracker.delete(id)) {
+                    System.out.println("SUCCES");
+                } else {
+                    System.out.println("ERROR");
+                }
+            } else if (select == 4) {
+                System.out.println("Получить id заявки, которую мы будем искать в хранилище");
+                int id = Integer.valueOf(scanner.nextLine());
+                Item item = tracker.findById(id);
+                if (item != null) {
+                    System.out.println(item);
+                } else {
+                    System.out.println("Заявка с таким id не найдена");
+                }
+            } else if (select == 5) {
+                System.out.println("Получить имя заявок, которые мы будем искать");
+                String name = scanner.nextLine();
+                Item[] items = tracker.findByName(name);
+                if (items.length > 0) {
+                    for (int i = 0; i < items.length; i++) {
+                        System.out.println(items[i]);
+                    }
+                } else {
+                    System.out.println("Заявки с таким именем не найдены");
+                }
+            } else if (select == 6) {
+                run = false;
+            }
+        }
+    }
+
+    private void showMenu() {
+        System.out.println("Menu.");
+        System.out.println("0. Add new Item");
+        System.out.println("1. Show all items");
+        System.out.println("2. Edit item");
+        System.out.println("3. Delete item");
+        System.out.println("4. Find item by Id");
+        System.out.println("5. Find item by name");
+        System.out.println("6. Exit program");
+        System.out.println("Select: ");
+    }
+
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         Tracker tracker = new Tracker();
-        Item firstItem = new Item();
-        Item secondItem = new Item();
-        firstItem.setId(1);
-        firstItem.setName("firstItem.setName");
-        secondItem.setId(2);
-        secondItem.setName("secondItem.setName");
-        tracker.add(firstItem);
-        tracker.add(secondItem);
-        System.out.println(tracker.findById(2).toString());
-        System.out.println(firstItem);
-
-        /*Item itemDateTime = new Item();
-        itemDateTime.getCreated();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        String itemDateTimeFormat = itemDateTime.getCreated().format(formatter);
-        System.out.println("Выводим полученную дату в консоль: " + itemDateTimeFormat);*/
+        new StartUI().init(scanner, tracker);
     }
 }
