@@ -11,7 +11,8 @@ public class College {
         student1.setGroup(1);
         student1.setCreated("2017");
 
-        System.out.println(student1.getFullName() + ", Проходит обучение в группе - " + student1.getGroup()
+        System.out.println(student1.getFullName() + ", "
+                + "Проходит обучение в группе - " + student1.getGroup()
                 + ", Год поступления: " + student1.getCreated());
     }
 }

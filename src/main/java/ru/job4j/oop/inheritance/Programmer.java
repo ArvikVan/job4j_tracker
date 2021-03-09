@@ -6,7 +6,8 @@ public class Programmer extends Engineer {
     public Programmer() {
     }
 
-    public Programmer(String name, String surname, String education, int birthday, String thisIsEngineer, String thisIsProgrammer) {
+    public Programmer(String name, String surname, String education,
+                      int birthday, String thisIsEngineer, String thisIsProgrammer) {
         super(name, surname, education, birthday, thisIsEngineer);
         this.thisIsProgrammer = thisIsProgrammer;
     }
