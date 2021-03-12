@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
@@ -50,7 +52,13 @@ public class StartUITest {
         Input in = new StubInput(new String[] {"0", "1"});
         UserAction[] actions = {new FindAllItems(output), new Exit(output)};
         new StartUI(output).init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("first item"));
+        assertThat(output.toString(), is("Menu." + System.lineSeparator()
+                + "0. - Find all items -" + System.lineSeparator()
+                + "1. - Exit -" + System.lineSeparator() + tracker.findById(item.getId())
+                + System.lineSeparator()
+                + "Menu." + System.lineSeparator()
+                + "0. - Find all items -" + System.lineSeparator()
+                + "1. - Exit -" + System.lineSeparator()));
     }
 
     @Test
@@ -61,8 +69,30 @@ public class StartUITest {
         Input in = new StubInput(new String[] {"0", String.valueOf(item.getId()), "1"});
         UserAction[] actions = {new FindByIdItem(output), new Exit(output)};
         new StartUI(output).init(in, tracker, actions);
-        Item[] ite = tracker.findByName(item.getName());
-        assertThat(ite[0].getId(), is(item.getId()));
+        assertThat(output.toString(), is("Menu." + System.lineSeparator()
+                + "0. - Find by id item -" + System.lineSeparator()
+                + "1. - Exit -" + System.lineSeparator() + tracker.findById(item.getId())
+                + System.lineSeparator()
+                + "Menu." + System.lineSeparator()
+                + "0. - Find by id item -" + System.lineSeparator()
+                + "1. - Exit -" + System.lineSeparator()));
+    }
+
+    @Test
+    public void whenFindByName() {
+        Output output = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("whenFindByName"));
+        Input in = new StubInput(new String[] {"0", item.getName(), "1"});
+        UserAction[] actions = {new FindByNameItem(output), new Exit(output)};
+        new StartUI(output).init(in, tracker, actions);
+        assertThat(output.toString(), is("Menu." + System.lineSeparator()
+                + "0. - Find by name item -" + System.lineSeparator()
+                + "1. - Exit -" + System.lineSeparator() + tracker.findById(item.getId())
+                + System.lineSeparator()
+                + "Menu." + System.lineSeparator()
+                + "0. - Find by name item -" + System.lineSeparator()
+                + "1. - Exit -" + System.lineSeparator()));
     }
 
     @Test
@@ -73,6 +103,6 @@ public class StartUITest {
         UserAction[] actions = {new Exit(output)}; // меню
         new StartUI(output).init(in, tracker, actions);
         assertThat(output.toString(), is("Menu." + System.lineSeparator()
-                + "0. - Exit -" + System.lineSeparator()));
+                                                + "0. - Exit -" + System.lineSeparator()));
     }
 }
