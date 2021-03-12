@@ -14,7 +14,7 @@ public class CreateAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        System.out.println("=== Create a new Item ====");
+        out.println("=== Create a new Item ====");
         Item item = new Item(input.askStr("Enter name throw input"));
         tracker.add(item);
         return true;
