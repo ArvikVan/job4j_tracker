@@ -1,9 +1,6 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
-import ru.job4j.oop.Transport;
-
-import javax.sound.midi.Track;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -13,9 +10,10 @@ public class StartUITest {
 
     @Test
     public void whenAddItem() {
+        Output out = new StubOutput();
         Input input = new StubInput(new String[]{"0", "Item name", "1"});
         Tracker tracker = new Tracker();
-        UserAction[] actions = {new CreateAction(), new Exit()};
+        UserAction[] actions = {new CreateAction(out), new Exit()};
         new StartUI().init(input, tracker, actions);
         assertThat(tracker.findAll()[0].getName(), is("Item name"));
     }
