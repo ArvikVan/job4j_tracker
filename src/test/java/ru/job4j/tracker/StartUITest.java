@@ -54,7 +54,7 @@ public class StartUITest {
         new StartUI(output).init(in, tracker, actions);
         assertThat(output.toString(), is("Menu." + System.lineSeparator()
                 + "0. - Find all items -" + System.lineSeparator()
-                + "1. - Exit -" + System.lineSeparator() + tracker.findById(item.getId())
+                + "1. - Exit -" + System.lineSeparator() + item
                 + System.lineSeparator()
                 + "Menu." + System.lineSeparator()
                 + "0. - Find all items -" + System.lineSeparator()
@@ -71,7 +71,7 @@ public class StartUITest {
         new StartUI(output).init(in, tracker, actions);
         assertThat(output.toString(), is("Menu." + System.lineSeparator()
                 + "0. - Find by id item -" + System.lineSeparator()
-                + "1. - Exit -" + System.lineSeparator() + tracker.findById(item.getId())
+                + "1. - Exit -" + System.lineSeparator() + item
                 + System.lineSeparator()
                 + "Menu." + System.lineSeparator()
                 + "0. - Find by id item -" + System.lineSeparator()
